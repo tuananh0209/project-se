@@ -1,0 +1,30 @@
+extends ../layout/layout.pug
+
+block content
+    form.ml-auto(action="/products/search", method="get", class="form-group d-flex" )
+        input(type='text', name='q', class="form-control", value=inputs?inputs:"")
+        button(class="btn btn-primary ml-2") search
+
+    .row
+        each data in product
+            .col-md-4.col-sm-6.col-lg-3
+                .card.mb-3
+                    img.card-img-top(src=data.image)
+                    .card-body
+                        h5.card-title= data.name
+                        h6= data.price
+                        p.card-text= data.description
+                        a.align-items-end.btn.btn-primary(href='/cart/' + data.id) Add to cart
+
+
+    nav(aria-label='Page navigation example')
+    ul.pagination
+        li.page-item
+        -var i = parseInt(perPage);
+        a.page-link(href='/products/products?page=' + --i) Previous
+        -var n = 0;
+        
+        while n <= page
+            li.page-item
+            a.page-link(href='/products/products?page=' + ++n)= n
+        a.page-link(href='/products/products?page=' + (i + 2)) Next

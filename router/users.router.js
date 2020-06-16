@@ -20,6 +20,13 @@ router.get('/creat', controller.creat)
 
 router.post('/creat', upload.single('avatar') ,validate.postCreat , controller.postCreat);
 
-router.get('/:id', controller.view)
+router.get('/report', controller.report);
+
+router.get('/errors', controller.errors);
+
+router.get('/:id', controller.view);
+
+router.get('/view/:id', controller.viewOrders);
+
 
 module.exports = router

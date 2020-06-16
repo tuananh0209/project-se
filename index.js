@@ -32,9 +32,9 @@ app.get('/',function(req , res){
 });
 
 app.use('/users',validateAuth.requestAuth, userRouter);
-app.use('/auth',loginRouter);
-app.use('/products', productsRouter);
-app.use('/cart' , cartRouter);
+app.use('/auth', loginRouter);
+app.use('/products', validateAuth.requestAuth, productsRouter);
+app.use('/cart', validateAuth.requestAuth, cartRouter);
 
 app.listen(port , function(){
     console.log("port: " + port);

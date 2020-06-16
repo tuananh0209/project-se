@@ -2,6 +2,8 @@ var db = require('../db')
 const shortid = require('shortid')
 const md5 = require('md5')
 
+
+
 module.exports.index = function (req, res) {
     res.render('users/users', {
         users: db.get('users').value()
@@ -15,7 +17,7 @@ module.exports.search = function (req, res) {
     })
     res.render('users/users', {
         users: userMatched,
-        inputs: name
+        inputs: name 
     });
 
 };
@@ -51,3 +53,15 @@ module.exports.view = function (req, res) {
         users: user
     });
 };
+
+module.exports.report = function (req, res) {
+    res.render('users/report');
+}
+
+module.exports.errors = function (req, res) {
+    res.render('users/errors');
+}
+
+module.exports.viewOrders = function (req, res){
+    res.render('users/viewOrders');
+}

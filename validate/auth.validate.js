@@ -6,29 +6,28 @@ module.exports.postLogin = function(req , res , next){
     var pass = req.body.pass;
     
     var user = db.get('users').find({ name : userName}).value();
-    
-    if (!user){
-        res.render('auth/login',{
-            error : [
-                'Name does not exist!' 
-            ],
-            value : req.body
-        });
-        return;
-    }
+    var error = [];
+   
 
-    if (user.pass !== md5(pass)){
-        res.render('auth/login',{
-            error: [
-                'Wrong password!'
-            ],
-            value : req.body
-        });
-        return;
-    }
+       if (!user) {
+           res.render('auth/login', {
+               error: [
+                   'Name does not exist!'
+               ],
+               value: req.body
+           });
+           return;
+       }
 
-    res.locals.user = user;
-
+       if (user.pass !== md5(pass)) {
+           res.render('auth/login', {
+               error: [
+                   'Wrong password!'
+               ],
+               value: req.body
+           });
+           return;
+       }
     next();
 }
 
